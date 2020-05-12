@@ -12,9 +12,9 @@ public class DBConection {
     public void connect(){
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             connection= DriverManager.getConnection(
-            "jdbc:mysql//local:3306/test_cars_jdbc?useUnicode=true&serverTimezone=UTC",
+            "jdbc:mysql//localhost :3306/test_cars?useUnicode=true&serverTimezone=UTC",
             "root", "");
         }catch (Exception e){
             e.printStackTrace();
@@ -24,8 +24,8 @@ public class DBConection {
     public void addCars(Cars car){
         try{
             PreparedStatement statement = connection.prepareStatement("" +
-                      "INSERT INTO cars (name, price, engine volume" +
-                    "VALUES(?, ?, ?");
+                      "INSERT INTO cars (name, price, enginevolume" +
+                    "VALUES (?, ?, ?)");
 
             statement.setString(1, car.getName());
             statement.setInt(2, car.getPrice());
@@ -44,14 +44,14 @@ public class DBConection {
         ArrayList<Cars> cars = new ArrayList<>();
         try{
             PreparedStatement statement = connection.prepareStatement("" +
-                    "Select id, name, price< engine volume FROM cars");
+                    "Select id, name, price, enginevolume FROM cars");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
              cars.add(new Cars(
                      resultSet.getLong("id"),
                      resultSet.getString("name"),
                      resultSet.getInt("price"),
-                     resultSet.getDouble("engine vilume")
+                     resultSet.getDouble("enginevolume")
              ));
             }
             statement.close();
@@ -65,7 +65,7 @@ public class DBConection {
     public void updateCars(Cars car){
         try{
             PreparedStatement statement = connection.prepareStatement("" +
-                            "UPDATE cars SET name = ?, price = ?, engine volume = ?" +
+                            "UPDATE cars SET name = ?, price = ?, enginevolume = ?" +
                     "WHERE id = ?");
 
 
