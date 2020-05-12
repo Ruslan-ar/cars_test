@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
-public class DBConection {
+public class DBConnection {
     private Connection connection;
 
     public void connect(){

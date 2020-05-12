@@ -8,12 +8,12 @@ public class MainFrame extends JFrame {
     private MenuPage menuPage;
     private AddCarPage addCarPage;
     private ListCarPage listCarPage;
-    private DBConection dbConection;
+    private DBConnection dbConnection;
 
     public MainFrame(){
 
-        dbConection = new DBConection();
-        dbConection.connect();
+        dbConnection = new DBConnection();
+        dbConnection.connect();
 
         setSize(750,750);
         setLayout(null);
@@ -53,13 +53,13 @@ public class MainFrame extends JFrame {
         this.listCarPage.setVisible(false);
     }
     public void addCar(Cars car){
-        this.dbConection.addCars(car);
+        this.dbConnection.addCars(car);
     }
     public void fillTable(ArrayList<Cars> cars){
         this.listCarPage.fillTable(cars);
     }
     public ArrayList<Cars> listCars(){
-        return this.dbConection.getAllCars();
+        return this.dbConnection.getAllCars();
     }
     public void refresh(){
         setResizable(true);
