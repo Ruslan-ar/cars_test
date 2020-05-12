@@ -24,7 +24,7 @@ public class DBConection {
     public void addCars(Cars car){
         try{
             PreparedStatement statement = connection.prepareStatement("" +
-                      "INSERT INTO cars (name, price, enginevolume" +
+                      "INSERT INTO cars (name, price, engineVolume" +
                     "VALUES (?, ?, ?)");
 
             statement.setString(1, car.getName());
@@ -44,14 +44,14 @@ public class DBConection {
         ArrayList<Cars> cars = new ArrayList<>();
         try{
             PreparedStatement statement = connection.prepareStatement("" +
-                    "Select id, name, price, enginevolume FROM cars");
+                    "Select id, name, price, engineVolume FROM cars");
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
              cars.add(new Cars(
                      resultSet.getLong("id"),
                      resultSet.getString("name"),
                      resultSet.getInt("price"),
-                     resultSet.getDouble("enginevolume")
+                     resultSet.getDouble("engineVolume")
              ));
             }
             statement.close();
@@ -65,7 +65,7 @@ public class DBConection {
     public void updateCars(Cars car){
         try{
             PreparedStatement statement = connection.prepareStatement("" +
-                            "UPDATE cars SET name = ?, price = ?, enginevolume = ?" +
+                            "UPDATE cars SET name = ?, price = ?, engineVolume = ?" +
                     "WHERE id = ?");
 
 
