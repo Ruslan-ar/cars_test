@@ -14,7 +14,7 @@ public class DBConection {
 
             Class.forName("com.mysql.jdbc.Driver");
             connection= DriverManager.getConnection(
-            "jdbc:mysql//localhost :3306/test_cars?useUnicode=true&serverTimezone=UTC",
+            "jdbc:mysql//localhost:3306/test_cars?useUnicode=true&serverTimezone=UTC",
             "root", "");
         }catch (Exception e){
             e.printStackTrace();
@@ -24,7 +24,7 @@ public class DBConection {
     public void addCars(Cars car){
         try{
             PreparedStatement statement = connection.prepareStatement("" +
-                      "INSERT INTO cars (name, price, engineVolume" +
+                      "INSERT INTO cars (name, price, engineVolume)" +
                     "VALUES (?, ?, ?)");
 
             statement.setString(1, car.getName());
