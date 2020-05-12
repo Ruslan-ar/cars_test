@@ -35,7 +35,7 @@ public class MenuPage extends Container {
             public void actionPerformed(ActionEvent actionEvent) {
                 parent.fillTable(parent.listCars());
                 parent.hideMainMenuPage();
-                parent.showAddCarPage();
+                parent.showListCarPage();
             }
         });
     }

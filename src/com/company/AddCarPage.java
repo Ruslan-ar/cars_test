@@ -71,8 +71,8 @@ public class AddCarPage extends Container {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                parent.hideMainMenuPage();
-                parent.showAddCarPage();
+                parent.hideAddCarPage();
+                parent.showMainMenuPage();
             }
         });
 

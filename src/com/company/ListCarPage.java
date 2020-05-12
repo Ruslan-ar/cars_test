@@ -28,8 +28,8 @@ public class ListCarPage extends Container {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                parent.hideAddCarPage();
-                parent.showAddCarPage();
+                parent.hideListCarPage();
+                parent.showMainMenuPage();
             }
         });
 
