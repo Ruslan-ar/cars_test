@@ -12,7 +12,7 @@ public class AddCarPage extends Container {
 
     public AddCarPage(MainFrame parent){
         this.parent = parent;
-        setSize(750,650);
+        setSize(700,700);
         setLocation(0,0);
         setLayout(null);
 
@@ -53,14 +53,21 @@ public class AddCarPage extends Container {
                 String engineVolumeText = engineVolumeField.getText();
                 double engineVolume = 0;
                 try{
-                    engineVolume = Integer.parseInt(engineVolumeText);
+                    engineVolume = Double.parseDouble(engineVolumeText);
+
+                }catch (Exception e){
+
+                }
+                int price = 0;
+                try{
+                    price = Integer.parseInt(engineVolumeText);
                 }catch (Exception e){
                 }
                 nameField.setText("");
                 priceField.setText("0");
                 engineVolumeField.setText("0");
 
-                parent.addCar(new Cars(null, name, priceText, engineVolume));
+                parent.addCar(new Cars(null, name, price, engineVolume));
 
             }
         });

@@ -15,7 +15,7 @@ public class MainFrame extends JFrame {
         dbConnection = new DBConnection();
         dbConnection.connect();
 
-        setSize(750,750);
+        setSize(700,700);
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
