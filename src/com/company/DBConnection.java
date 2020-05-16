@@ -12,7 +12,7 @@ public class DBConnection {
     public void connect(){
         try{
 
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             connection= DriverManager.getConnection(
             "jdbc:mysql//localhost:3306/cars_price?useUnicode=true&serverTimezone=UTC",
             "root", "");
