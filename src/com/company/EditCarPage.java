@@ -4,14 +4,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddCarPage extends Container {
+public class EditCarPage extends Container {
 
     private MainFrame parent;
     private ApplicationLabel nameLabel, priceLabel, engineVolumeLabel;
     private ApplicationField nameField, priceField, engineVolumeField;
-    private ApplicationButton addButton, backButton;
+    private ApplicationButton addButton, backButton, deleteButton;
+    private Long currentCarId;
 
-    public AddCarPage(MainFrame parent){
+    public EditCarPage(MainFrame parent){
+
         this.parent = parent;
         setSize(700,700);
         setLocation(0,0);
@@ -43,8 +45,8 @@ public class AddCarPage extends Container {
         engineVolumeField.setText("0");
         add(engineVolumeField);
 
-        addButton = new ApplicationButton("ADD CAR");
-        addButton.setLocation(250, 480);
+        addButton = new ApplicationButton("SAVE CAR");
+        addButton.setLocation(130, 480);
         add(addButton);
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -54,20 +56,36 @@ public class AddCarPage extends Container {
                 String engineVolumeText = engineVolumeField.getText();
                 double engineVolume = 0;
                 try{
-                    engineVolume = Double.parseDouble(priceText);
+                    engineVolume = Double.parseDouble(engineVolumeText);
                 }catch (Exception e){
                 }
                 int price = 0;
                 try{
-                    price = Integer.parseInt(engineVolumeText);
+                    price = Integer.parseInt(priceText);
                 }catch (Exception e){
                 }
                 nameField.setText("");
                 engineVolumeField.setText("0");
                 priceField.setText("0");
 
-                parent.addCar(new Cars(null, name, price, engineVolume));
+                parent.saveCar(new Cars(currentCarId, name, price, engineVolume));
+                parent.fillCarsList(parent.listCars());
+                parent.hideEditCarPage();
+                parent.showListCarPage();
 
+            }
+        });
+
+        deleteButton = new ApplicationButton("DELETE CAR");
+        deleteButton.setLocation(350, 480);
+        add(deleteButton);
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                parent.deleteCar(currentCarId);
+                parent.fillCarsList(parent.listCars());
+                parent.hideEditCarPage();
+                parent.showListCarPage();
             }
         });
 
@@ -77,10 +95,19 @@ public class AddCarPage extends Container {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                parent.hideAddCarPage();
-                parent.showMainMenuPage();
+                parent.hideEditCarPage();
+                parent.showListCarPage();
             }
         });
+
+    }
+
+    public void prepareForm(Cars car){
+
+        this.currentCarId = car.getId();
+        nameField.setText(car.getName());
+        priceField.setText(car.getPrice()+"");
+        engineVolumeField.setText(car.getEngineVolume()+"");
 
     }
 

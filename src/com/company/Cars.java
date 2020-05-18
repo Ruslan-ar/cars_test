@@ -13,14 +13,16 @@ public class Cars {
         this.engineVolume = engineVolume;
     }
 
-    public Cars(Long id, String name, String priceText, double engineVolume) {
+    public Cars() {
     }
 
     public Long getId() {
+
         return id;
     }
 
     public void setId(Long id) {
+
         this.id = id;
     }
 
@@ -45,6 +47,7 @@ public class Cars {
     }
 
     public double getEngineVolume() {
+
         return engineVolume;
     }
 
@@ -54,6 +57,7 @@ public class Cars {
 
     @Override
     public String toString() {
+
         return this.id + " " + this.name + " " + this.price + "USD " + this.engineVolume + " ";
     }
 }

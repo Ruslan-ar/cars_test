@@ -8,6 +8,8 @@ public class MainFrame extends JFrame {
     private MenuPage menuPage;
     private AddCarPage addCarPage;
     private ListCarPage listCarPage;
+    private EditCarPage editCarPage;
+
     private DBConnection dbConnection;
 
     public MainFrame(){
@@ -19,7 +21,7 @@ public class MainFrame extends JFrame {
         setLayout(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-        setTitle(" CARS CLIENT APPLICATION");
+        setTitle("CAR SHOP CLIENT APPLICATION");
 
         menuPage = new MenuPage(this);
         menuPage.setVisible(true);
@@ -27,11 +29,15 @@ public class MainFrame extends JFrame {
 
         addCarPage = new AddCarPage(this);
         addCarPage.setVisible(false);
-        add(menuPage);
+        add(addCarPage);
 
         listCarPage = new ListCarPage(this);
         listCarPage.setVisible(false);
         add(listCarPage);
+
+        editCarPage = new EditCarPage(this);
+        editCarPage.setVisible(false);
+        add(editCarPage);
 
     }
     public void showMainMenuPage(){
@@ -52,15 +58,22 @@ public class MainFrame extends JFrame {
     public void hideListCarPage(){
         this.listCarPage.setVisible(false);
     }
-    public void addCar(Cars car){
-        this.dbConnection.addCars(car);
-    }
-    public void fillTable(ArrayList<Cars> cars){
+    public void showEditCarPage(){ this.editCarPage.setVisible(true);}
+    public void hideEditCarPage(){ this.editCarPage.setVisible(false);}
+
+    public void fillCarsList(ArrayList<Cars> cars){
         this.listCarPage.fillTable(cars);
     }
-    public ArrayList<Cars> listCars(){
-        return this.dbConnection.getAllCars();
+    public void prepareEditCarPage(Cars car){this.editCarPage.prepareForm(car);}
+
+    public void addCar(Cars car){
+        this.dbConnection.addItem(car);
     }
+    public ArrayList<Cars> listCars(){return this.dbConnection.getAllCars(); }
+    public Cars getCar(Long id){ return this.dbConnection.getCar(id); }
+    public void saveCar(Cars car){ this.dbConnection.updateCar(car);}
+    public void deleteCar(Long id){this.dbConnection.deleteCar(id);}
+
     public void refresh(){
         setResizable(true);
         setSize((int)getSize().getWidth()+1, (int)getSize().getHeight());

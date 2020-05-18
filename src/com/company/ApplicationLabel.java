@@ -1,5 +1,6 @@
 package com.company;
 
+
 import javax.swing.*;
 
 public class ApplicationLabel extends JLabel {
@@ -10,4 +11,5 @@ public class ApplicationLabel extends JLabel {
         setForeground(StaticConfig.textFieldTextColor);
         setFont(StaticConfig.textFont);
     }
+
 }

@@ -7,24 +7,28 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 public class DBConnection {
+
     private Connection connection;
 
     public void connect(){
         try{
 
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection= DriverManager.getConnection(
-            "jdbc:mysql//localhost:3306/cars_price?useUnicode=true&serverTimezone=UTC",
-            "root", "");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/cars_test?useUnicode=true&serverTimezone=UTC",
+                    "root", "");
+
         }catch (Exception e){
             e.printStackTrace();
         }
     }
 
-    public void addCars(Cars car){
+    public void addItem(Cars car){
+
         try{
+
             PreparedStatement statement = connection.prepareStatement("" +
-                      "INSERT INTO cars (name, price, engineVolume)" +
+                    "INSERT INTO cars (name, price, engineVolume) " +
                     "VALUES (?, ?, ?)");
 
             statement.setString(1, car.getName());
@@ -41,33 +45,72 @@ public class DBConnection {
     }
 
     public ArrayList<Cars> getAllCars(){
+
         ArrayList<Cars> cars = new ArrayList<>();
+
         try{
+
             PreparedStatement statement = connection.prepareStatement("" +
-                    "Select id, name, price, engineVolume FROM cars");
+                    "SELECT id, name, price, engineVolume FROM cars");
+
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()){
-             cars.add(new Cars(
-                     resultSet.getLong("id"),
-                     resultSet.getString("name"),
-                     resultSet.getInt("price"),
-                     resultSet.getDouble("engineVolume")
-             ));
+            while(resultSet.next()){
+                cars.add(new Cars(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("price"),
+                        resultSet.getDouble("engineVolume")
+                ));
             }
+
             statement.close();
 
         }catch (Exception e){
             e.printStackTrace();
         }
+
         return cars;
+
     }
 
-    public void updateCars(Cars car){
-        try{
-            PreparedStatement statement = connection.prepareStatement("" +
-                            "UPDATE cars SET name = ?, price = ?, engineVolume = ?" +
-                    "WHERE id = ?");
+    public Cars getCar(Long id){
 
+        Cars car = null;
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "SELECT id, name, price, engineVolume FROM cars WHERE id = ? ");
+
+            statement.setLong(1, id);
+
+            ResultSet resultSet = statement.executeQuery();
+            if(resultSet.next()){
+                car = new Cars(
+                        resultSet.getLong("id"),
+                        resultSet.getString("name"),
+                        resultSet.getInt("price"),
+                        resultSet.getDouble("engineVolume")
+                );
+            }
+
+            statement.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return car;
+
+    }
+
+    public void updateCar(Cars car){
+
+        try{
+
+            PreparedStatement statement = connection.prepareStatement("" +
+                    "UPDATE cars SET name = ?, price = ?, engineVolume = ? " +
+                    "WHERE id = ?");
 
             statement.setString(1, car.getName());
             statement.setInt(2, car.getPrice());
@@ -82,16 +125,23 @@ public class DBConnection {
         }
 
     }
-    public void deleteCars(Long id){
+
+    public void deleteCar(Long id){
+
         try{
+
             PreparedStatement statement = connection.prepareStatement("" +
-                    "DELETE FROM cars WHERE id = ?");
+                    " DELETE FROM cars WHERE id = ? ");
 
             statement.setLong(1, id);
+
             statement.executeUpdate();
             statement.close();
+
         }catch (Exception e){
             e.printStackTrace();
         }
+
     }
+
 }

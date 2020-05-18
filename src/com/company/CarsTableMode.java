@@ -1,6 +1,7 @@
 package com.company;
 
 import javax.swing.table.AbstractTableModel;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class CarsTableMode extends AbstractTableModel {
@@ -14,12 +15,13 @@ public class CarsTableMode extends AbstractTableModel {
 
     @Override
     public int getRowCount() {
+
         return cars.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     @Override
@@ -33,13 +35,20 @@ public class CarsTableMode extends AbstractTableModel {
                 return cars.get(row).getPrice();
             case 3 :
                 return cars.get(row).getEngineVolume();
+            case 4:
+                final ApplicationButton editButton = new ApplicationButton("Edit Car");
+                editButton.setBackground(Color.DARK_GRAY);
+                editButton.setFont(new Font("Calibri", 1, 16));
+                editButton.setBorder(null);
+                editButton.setSize(100, 20);
+                return editButton;
             default: return "";
         }
     }
     @Override
-    public String getColumnName(int colum) {
+    public String getColumnName(int column) {
         String result = "";
-        switch (colum){
+        switch (column){
             case 0:
                 result = "ID";
                 break;

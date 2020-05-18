@@ -12,7 +12,7 @@ public class MenuPage extends Container {
     public MenuPage(MainFrame parent){
 
         this.parent = parent;
-        setSize(750,650);
+        setSize(750,750);
         setLocation(0,0);
         setLayout(null);
 
@@ -33,7 +33,7 @@ public class MenuPage extends Container {
         listCarsButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                parent.fillTable(parent.listCars());
+                parent.fillCarsList(parent.listCars());
                 parent.hideMainMenuPage();
                 parent.showListCarPage();
             }
