@@ -36,7 +36,7 @@ public class CarsTableMode extends AbstractTableModel {
             case 3 :
                 return cars.get(row).getEngineVolume();
             case 4:
-                final ApplicationButton editButton = new ApplicationButton("Edit Car");
+                final ApplicationButton editButton = new ApplicationButton("EDIT CAR");
                 editButton.setBackground(Color.DARK_GRAY);
                 editButton.setFont(new Font("Calibri", 1, 16));
                 editButton.setBorder(null);
@@ -60,6 +60,9 @@ public class CarsTableMode extends AbstractTableModel {
                 break;
             case 3:
                 result = "ENGINE VOLUME";
+                break;
+            case 4:
+                result = "EDIT";
                 break;
 
         }

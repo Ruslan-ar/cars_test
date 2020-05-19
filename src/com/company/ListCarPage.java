@@ -13,7 +13,7 @@ public class ListCarPage extends Container {
     private  JTable table;
     private  JScrollPane pane;
     private  JPanel panel;
-    private  ApplicationButtonRenderer buttonRenderer = new ApplicationButtonRenderer();
+    private final ApplicationButtonRenderer buttonRenderer = new ApplicationButtonRenderer();
 
     public ListCarPage(MainFrame parent){
 

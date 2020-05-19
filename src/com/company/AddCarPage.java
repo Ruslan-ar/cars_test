@@ -54,12 +54,12 @@ public class AddCarPage extends Container {
                 String engineVolumeText = engineVolumeField.getText();
                 double engineVolume = 0;
                 try{
-                    engineVolume = Double.parseDouble(priceText);
+                    engineVolume = Double.parseDouble(engineVolumeText);
                 }catch (Exception e){
                 }
                 int price = 0;
                 try{
-                    price = Integer.parseInt(engineVolumeText);
+                    price = Integer.parseInt(priceText);
                 }catch (Exception e){
                 }
                 nameField.setText("");
